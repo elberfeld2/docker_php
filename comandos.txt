@@ -1,0 +1,98 @@
+
+
+
+Iniciamos
+
+//Si tenemos ya los archivos junto al dockerfile en dockerfiles 
+
+cd dockerfiles
+docker build -t miphp .
+cd ..
+
+Esto genera la imagen comprueba con
+
+docker images
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+	Importante
+/////////////////////////////////////////////////////////////////////////////////////////
+Una ves echo corremos el composer en caso que se quiera correrlo manualmente
+
+cambiar el en el yml 
+miphp por php:7.0-apache
+checar mas abajo
+
+/////////////////////////////////////////////////////////////////////////////////////////
+	Importante
+/////////////////////////////////////////////////////////////////////////////////////////
+
+docker-compose up -d   
+
+Comprobamos que esten corriendo
+docker ps
+Entramos al servicio php
+docker exec -i -t dphp /bin/bash
+
+//////////////////////////////////////////////////////////////////////////////////////
+Esto es opcional puesdes aceder esternamente localhost:3306 user 1234
+//////////////////////////////////////////////////////////////////////////////////////
+docker exec -i -t dmysql /bin/bash
+Acedemos al usuario 1234
+mysql -uuser -p
+ya en mysql acedemos a la base
+use base
+
+Ejecutamos los scrips
+
+Salimos
+exit
+exit
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+Dentro
+//////////////////////////////////////////////////////////////////////////////////////
+docker-php-ext-install mysqli
+
+Comprueba la direcion
+Ejemplo: cd /usr/local/lib/php/extensions/no-debug-non-zts-20151012/
+Ejemplo: ls -l 
+Ejemplo: mysqli.so
+
+cd /usr/local/etc/php/
+
+apt-get update
+apt-get install nano
+
+nano php.ini-production 
+nano php.ini-development 
+
+modidicamos las extenciones
+extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/mysqli.so
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+docker restart dphp
+
+Parar el sevicio mysql
+docker stop dmysql 
+
+Iniciar el servicio mysql
+docker start dmysql 
+
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+
+
+
+
+
+
+
+
