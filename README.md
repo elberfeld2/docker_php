@@ -1,7 +1,6 @@
 # Docker 
 
-Este es un ejemplo de docker con docker-compose para crear un entorno de trabajo
-con php y mysql ademas de agregar phpmyadmin para poder manejar la base de datos con facilidad.
+Este es un ejemplo de docker con docker-compose para crear un entorno de trabajo con php y mysql ademas de agregar phpmyadmin para poder manejar la base de datos con facilidad.
 
 ## Antes de
 
@@ -60,7 +59,7 @@ A qui vemos la configuración para phpmyadmin donde solo se modifica la salida d
 
 La configuración para php hace uso de un Dokerfile guardado en dockerfiles, el cual usamos para agregar la extension mysqli que no viene en la imagen de php. 
 
-```js
+```docker
 FROM php:7.0-apache
 
 RUN a2enmod rewrite
@@ -89,7 +88,7 @@ Como se pude ver abajo ademas del uso del Dockerfile tambien contamos con un vol
 ## Configuraciones alternativas
 
 #### Bajar imagenes
-```
+```bash
 docker pull mysql:5.7
 docker pull php:7.0-apache
 docker pull phpmyadmin/phpmyadmin
@@ -98,7 +97,7 @@ docker pull phpmyadmin/phpmyadmin
 
 Acedemos a la carpeta dockerfiles y generamos la imagen
 
-```
+```bash
 cd dockerfiles
 docker build -t miphp .
 ```
@@ -137,26 +136,26 @@ Para esto debemos modificar el yml
 ```
 Una ves hecho esto se debe modificar el contenedor desde adentro con el siguiente comando.
 
-```
+```bash
 docker exec -i -t dphp /bin/bash
 ```
 
 Ya adentro ejecutamos los siguientes comandos.
 
-```
+```bash
 docker-php-ext-install mysqli
 ```
 
 Instalamos nano opcional si no vim
 
-```
+```bash
 apt-get update
 apt-get install nano
 ```
 
 Y modificamos los siguientes archivos.
 
-```
+```bash
 cd /usr/local/etc/php/
 nano php.ini-production 
 nano php.ini-development 
@@ -176,19 +175,19 @@ Agregamos la extensión MySql y podemos acceder con el usuario y contraseña ade
 
 Podemos acceder al contenedor con el siguiente comando.
 
-```
+```bash
 docker exec -i -t dmysql /bin/bash
 ```
 
 Ya dentro podemos ejecutar los siguientes comandos.
-```
+```bash
 mysql -uuser -p
 ```
 Te pedira la contraseña una ves ejecutados tus comandos pudes salir con exit.
 
 #### Comandos basicos 
 
-```js
+```php
 docker ps //Ver los contenedores activos
 docker ps -a//Ver todos contenedores 
 docker images //Ver la imagenes
@@ -201,3 +200,14 @@ docker start //Inicia el contenedor
 docker restart //Reinicia el contenedor
 ```
 
+## Urls
+
+#### Info
+[Basico docker](https://www.kodetop.com/tutorial-basico-de-docker/)
+[Contenedores](https://www.kodetop.com/simplifica-el-uso-de-contenedores-con-docker-compose/)
+[Laravel](https://www.youtube.com/watch?v=sR3Zp33fdPw)
+
+#### Hubs
+[phpmyadmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
+[php](https://hub.docker.com/_/php)
+[mysql](https://hub.docker.com/_/mysql)
